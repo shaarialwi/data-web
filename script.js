@@ -1,4 +1,4 @@
-const webhookUrl = "https://mrantidata.app.n8n.cloud/webhook/contact-form";
+const webhookUrl = "https://mrantidata.app.n8n.cloud/webhook-test/contact-form";
 
 fetch(webhookUrl, {
     method: "GET",
