@@ -1,7 +1,7 @@
 const webhookUrl = "https://mrantidata.app.n8n.cloud/webhook/contact-form";
 
 fetch(webhookUrl, {
-    method: "POST",
+    method: "GET",
     headers: {
         "Content-Type": "application/json"
     },
