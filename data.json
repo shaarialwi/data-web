@@ -1,0 +1,26 @@
+{
+  "total_calon": 120,
+  "total_pengundi": 2590000,
+  "duns": [
+    {
+      "code": "N01",
+      "name": "Buloh Kasap",
+      "voters": 28481,
+      "cands": [
+        { "name": "Calon A", "party": "BN" },
+        { "name": "Calon B", "party": "PH" }
+      ],
+      "inc": ["Penyandang Terdahulu", "BN"]
+    },
+    {
+      "code": "N02",
+      "name": "Jementah",
+      "voters": 41221,
+      "cands": [
+        { "name": "Calon C", "party": "PN" },
+        { "name": "Calon D", "party": "PH" }
+      ],
+      "inc": ["Penyandang Terdahulu", "PH"]
+    }
+  ]
+}
