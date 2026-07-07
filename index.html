@@ -1,7 +1,95 @@
-<input type="text" id="name" placeholder="Name">
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calon &amp; Pengundi — PRN Johor Ke-16</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="wrap">
 
-<input type="email" id="email" placeholder="Email">
+    <header class="masthead">
+      <div>
+        <div class="eyebrow">Pilihan Raya Negeri Johor Ke-16 · 11 Julai 2026</div>
+        <h1>Calon &amp; Pengundi Mengikut Kawasan (DUN)</h1>
+      </div>
+      <div class="stats">
+        <div class="stat"><span class="num">{{ total_calon }}</span><span class="cap">Calon</span></div>
+        <div class="stat"><span class="num">56</span><span class="cap">Kerusi</span></div>
+        <div class="stat"><span class="num">{{ fmt(total_pengundi) }}</span><span class="cap">Pengundi</span></div>
+      </div>
+    </header>
 
-<input type="text" id="phone" placeholder="Phone">
+    <div class="grid">
 
-<button id="submitBtn">Submit</button>
+      <aside class="panel list-panel">
+        <form class="search" method="get" action="/">
+          <input type="text" name="q" value="{{ q }}" placeholder="Cari kawasan atau calon…" autocomplete="off">
+          <div class="result-label">{{ result_label }}</div>
+        </form>
+        <div class="list">
+          {% for d in duns %}
+          <a class="row {{ 'active' if d.code == selected.code else '' }}"
+             href="{{ url_for('index', dun=d.code, q=q) }}">
+            <span class="row-code">{{ d.code }}</span>
+            <span class="row-name">{{ d.name }}</span>
+            <span class="row-voters">{{ fmt(d.voters) }}</span>
+          </a>
+          {% else %}
+          <div class="empty">Tiada kawasan sepadan dengan carian.</div>
+          {% endfor %}
+        </div>
+      </aside>
+
+      <section class="panel detail">
+        <div class="detail-head">
+          <div>
+            <span class="dun-chip">{{ selected.code }}</span>
+            <h2>{{ selected.name }}</h2>
+            <div class="sub">{{ selected.cands|length }} calon bertanding</div>
+          </div>
+          <div class="voters-big">
+            <div class="num">{{ fmt(selected.voters) }}</div>
+            <div class="cap">Jumlah Pengundi Berdaftar</div>
+          </div>
+        </div>
+
+        <div class="section-label">Calon Bertanding</div>
+        <div class="cands">
+          {% for name, party in selected.cands %}
+          <div class="cand">
+            <span class="dot" style="background: {{ color(party) }}"></span>
+            <div>
+              <div class="cand-name">{{ name }}</div>
+              <div class="cand-party" style="color: {{ color(party) }}">{{ label(party) }}</div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+
+        <div class="incumbent">
+          <span class="section-label inline">Penyandang PRN15 (2022)</span>
+          <span class="dot sm" style="background: {{ color(selected.inc[1]) }}"></span>
+          <span class="inc-name">{{ selected.inc[0] }}</span>
+          <span class="inc-party" style="color: {{ color(selected.inc[1]) }}">{{ label(selected.inc[1]) }}</span>
+        </div>
+      </section>
+
+    </div>
+
+    <div class="legend">
+      <span class="legend-title">Petunjuk Parti / Gabungan</span>
+      {% for key, name, col in legend %}
+      <span class="leg"><span class="dot sm" style="background: {{ col }}"></span><b>{{ key }}</b> <em>{{ name }}</em></span>
+      {% endfor %}
+    </div>
+
+    <footer class="source">Sumber: Suruhanjaya Pilihan Raya (SPR) · Daftar Pemilih April 2026 · 172 calon · 56 kerusi</footer>
+
+  </div>
+</body>
+</html>
