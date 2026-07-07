@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="url_for('static', filename='style.css')">
   <link rel="stylesheet" href="python-app/static/style.css">
 </head>
 <body>
@@ -29,13 +29,13 @@
 
       <aside class="panel list-panel">
         <form class="search" method="get" action="/">
-          <input type="text" name="q" value="{{ q }}" placeholder="Cari kawasan atau calon…" autocomplete="off">
+          <input type="text" name="q" value="q" placeholder="Cari kawasan atau calon…" autocomplete="off">
           <div class="result-label">result_label </div>
         </form>
         <div class="list">
           {% for d in duns %}
-          <a class="row {{ 'active' if d.code == selected.code else '' }}"
-             href="{{ url_for('index', dun=d.code, q=q) }}">
+          <a class="row 'active' if d.code == selected.code else '' "
+             href="url_for('index', dun=d.code, q=q)">
             <span class="row-code">d.code </span>
             <span class="row-name">d.name </span>
             <span class="row-voters">fmt(d.voters)</span>
@@ -51,10 +51,10 @@
           <div>
             <span class="dun-chip">{{ selected.code }}</span>
             <h2>{{ selected.name }}</h2>
-            <div class="sub">{{ selected.cands|length }} calon bertanding</div>
+            <div class="sub">selected.cands|length calon bertanding</div>
           </div>
           <div class="voters-big">
-            <div class="num">{{ fmt(selected.voters) }}</div>
+            <div class="num">fmt(selected.voters)</div>
             <div class="cap">Jumlah Pengundi Berdaftar</div>
           </div>
         </div>
@@ -66,7 +66,7 @@
             <span class="dot" style="background: {{ color(party) }}"></span>
             <div>
               <div class="cand-name">{{ name }}</div>
-              <div class="cand-party" style="color: {{ color(party) }}">{{ label(party) }}</div>
+              <div class="cand-party" style="color: color(party)">label(party)</div>
             </div>
           </div>
           {% endfor %}
@@ -85,7 +85,7 @@
     <div class="legend">
       <span class="legend-title">Petunjuk Parti / Gabungan</span>
       {% for key, name, col in legend %}
-      <span class="leg"><span class="dot sm" style="background: {{ col }}"></span><b>{{ key }}</b> <em>{{ name }}</em></span>
+      <span class="leg"><span class="dot sm" style="background: col "></span><b>key</b> <em>name</em></span>
       {% endfor %}
     </div>
 
